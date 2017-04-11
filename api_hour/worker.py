@@ -76,7 +76,6 @@ class Worker(base.Worker):
                     tasks.append(handler.shutdown(timeout=self.cfg.graceful_timeout / 100 * 80))
                 elif hasattr(handler, 'finish_connections'):
                     tasks.append(handler.finish_connections(timeout=self.cfg.graceful_timeout / 100 * 80))
-
             if tasks:
                 await asyncio.wait(tasks, loop=self.loop)
             self.log.debug('All connections terminated')
